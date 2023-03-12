@@ -40,6 +40,10 @@ with open('index.html', 'w') as f:
     f.write('</head>\n')
     f.write('<body>\n')
 
+
+    # Write the HTML code for the title banner
+    f.write('<div id="title">阿媽新聞匯</div>\n')
+
     # Write the HTML code for the links
     for news_link in news_links:
         f.write(news_link + '<br>\n')
