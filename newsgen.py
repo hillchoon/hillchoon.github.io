@@ -13,10 +13,17 @@ for url in urls:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # Extract the head title of the web page
-    title = soup.find('title').text
+#    title = soup.find('title').text
+    title_element = soup.find('title')
+    if title_element is not None:
+        title = title_element.text
+    else:
+        title = "Unknown"
+
 
     # Generate the HTML code for the link
-    news_link = f'<a href="{url}">{title}</a>'
+#   news_link = f'<a href="{url}">{title}</a>'
+    news_link = f'<a href="{url}" style="text-decoration:none;">{title}</a>'
     news_links.append(news_link)
 
 # Write the generated HTML code to a new output file
@@ -27,6 +34,7 @@ with open('index.html', 'w') as f:
     f.write('<head>\n')
     f.write('<meta charset="UTF-8">\n')
     f.write('<title>阿媽新聞匯</title>\n')
+    f.write('<meta http-equiv="refresh" content="300">')
     f.write('<style>\n')
     f.write('  #title {\n')
     f.write('    background-color: #ffcc00;\n')
@@ -37,18 +45,22 @@ with open('index.html', 'w') as f:
     f.write('    padding: 10px;\n')
     f.write('    margin-bottom: 20px;\n')
     f.write('  }\n')
+    f.write('  a {')
+    f.write('    font-size: 17px;')
+    f.write('    text-decoration: none;')
+    f.write('  }')
     f.write('</style>\n')
     f.write('</head>\n')
     f.write('<body>\n')
 
 
     # Write the HTML code for the title banner
-    f.write('<div id="title">阿媽新聞匯</div>\n')
+    f.write('<div id="title">阿  媽  新  聞  匯</div>\n')
 
     # Write the HTML code for the links
     for news_link in news_links:
         f.write(news_link)
-        f.write('<br>\n')
+        f.write('<p>\n')
 
     # Write the HTML footer
     f.write('</body>\n')
