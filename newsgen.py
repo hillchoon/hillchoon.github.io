@@ -1,9 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 # Read the input text file
 with open('url.list', 'r') as f:
-    urls = f.read().splitlines()
+    urls = [line.strip() for line in f.readlines()[:30]]
 
 # Generate the HTML code for each URL
 news_links = []
@@ -25,6 +26,10 @@ for url in urls:
 #   news_link = f'<a href="{url}">{title}</a>'
     news_link = f'<a href="{url}" style="text-decoration:none;">{title}</a>'
     news_links.append(news_link)
+
+# Get the current date and Lunar calendar date
+now = datetime.now()
+current_date = now.strftime("%Y年%m月%d日")
 
 # Write the generated HTML code to a new output file
 with open('index.html', 'w') as f:
@@ -55,7 +60,7 @@ with open('index.html', 'w') as f:
 
 
     # Write the HTML code for the title banner
-    f.write('<div id="title">阿  媽  新  聞  匯</div>\n')
+    f.write('<div id="title">{current_date} - 阿  媽  新  聞  匯 - </div>\n')
 
     # Write the HTML code for the links
     for news_link in news_links:
