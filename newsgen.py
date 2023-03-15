@@ -42,6 +42,8 @@ with open('index.html', 'w') as f:
     f.write('<meta http-equiv="refresh" content="300">')
     f.write('<style>\n')
     f.write('  #title {\n')
+    f.write('    display: flex;')
+    f.write('    justify-content: space-between;')
     f.write('    background-color: #ffcc00;\n')
     f.write('    color: #333333;\n')
     f.write('    font-size: 24px;\n')
@@ -60,7 +62,7 @@ with open('index.html', 'w') as f:
 
 
     # Write the HTML code for the title banner
-    f.write('<div id="title">{current_date} - 阿  媽  新  聞  匯 - </div>\n')
+    f.write(f'<div id="title"><span></span>阿  媽  新  聞  匯<span>{current_date}</span></div>\n')
 
     # Write the HTML code for the links
     for news_link in news_links:
